@@ -1,0 +1,23 @@
+import sqlite3
+
+conn = sqlite3.connect("database.db")
+cur = conn.cursor()
+
+tables = ["users", "plants", "bookings", "plantation"]
+
+for table in tables:
+    print("\n" + "="*40)
+    print("TABLE:", table)
+    print("="*40)
+
+    cur.execute(f"SELECT * FROM {table}")
+
+    rows = cur.fetchall()
+
+    if rows:
+        for row in rows:
+            print(row)
+    else:
+        print("No data found")
+
+conn.close()

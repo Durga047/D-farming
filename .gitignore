@@ -1,0 +1,12 @@
+﻿__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+instance/
+database.db
+database.db-journal
+app.py.backup
+database.db.backup

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DFarming Register</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: #2e7d32;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            margin: 20px;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #1b5e20;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 15px;
+            min-height: 70vh;
+        }
+
+        .register-box {
+            background: white;
+            width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .register-box h1 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn {
+            background: #777;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    🌳 D Farming - Tree Plantation & Plant Booking
+</div>
+
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    <a href="/addplant">Add Plant</a>
+    <a href="/contact">Contact Us</a>
+</div>
+
+<div class="register-container">
+    <div class="register-box">
+
+        <h1>DFarming Register</h1>
+        <div class="step-title" id="stepTitle">Step 1 of 2 - Personal Details</div>
+
+        <form method="POST">
+
+            <!-- STEP 1 -->
+            <div class="form-step active" id="step1">
+
+                <label>First Name</label>
+                <input type="text"
+                       name="first_name"
+                       placeholder="Enter First Name"
+                       required>
+
+                <label>Last Name</label>
+                <input type="text"
+                       name="last_name"
+                       placeholder="Enter Last Name"
+                       required>
+
+                <label>Email</label>
+                <input type="email"
+                       name="email"
+                       placeholder="Enter Email Address"
+                       required>
+
+                <label>Phone Number</label>
+                <input type="tel"
+                       name="phone"
+                       placeholder="Enter Phone Number"
+                       pattern="[0-9]{10}"
+                       maxlength="10"
+                       required>
+
+                <label>Address</label>
+                <textarea name="address"
+                          placeholder="Enter Your Address"
+                          required></textarea>
+
+                <label>Occupation</label>
+                <input type="text"
+                       name="occupation"
+                       placeholder="Enter Your Occupation"
+                       required>
+
+                <div class="button-row">
+                    <button type="button" onclick="nextStep()">
+                        Next →
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="form-step" id="step2">
+
+                <label>Email</label>
+                <input type="email"
+                       id="emailDisplay"
+                       placeholder="Your email"
+                       readonly>
+
+                <label>Create Password</label>
+                <input type="password"
+                       name="password"
+                       placeholder="Create Password"
+                       minlength="6"
+                       required>
+
+                <label>Confirm Password</label>
+                <input type="password"
+                       name="confirm_password"
+                       placeholder="Confirm Password"
+                       minlength="6"
+                       required>
+
+                <div class="button-row">
+                    <button type="button" class="back-btn" onclick="previousStep()">
+                        ← Back
+                    </button>
+
+                    <button type="submit">
+                        Register
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/login">Login Here</a>
+        </div>
+
+    </div>
+</div>
+
+<a href="https://wa.me/919999999999" class="whatsapp">💬</a>
+
+<script>
+    function nextStep() {
+        const step1 = document.getElementById("step1");
+
+        if (!step1.querySelector("input[name='first_name']").reportValidity()) return;
+        if (!step1.querySelector("input[name='last_name']").reportValidity()) return;
+        if (!step1.querySelector("input[name='email']").reportValidity()) return;
+        if (!step1.querySelector("input[name='phone']").reportValidity()) return;
+        if (!step1.querySelector("textarea[name='address']").reportValidity()) return;
+        if (!step1.querySelector("input[name='occupation']").reportValidity()) return;
+
+        const email = document.querySelector("input[name='email']").value;
+        document.getElementById("emailDisplay").value = email;
+
+        document.getElementById("step1").classList.remove("active");
+        document.getElementById("step2").classList.add("active");
+        document.getElementById("stepTitle").innerText =
+            "Step 2 of 2 - Create Password";
+    }
+
+    function previousStep() {
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("step1").classList.add("active");
+        document.getElementById("stepTitle").innerText =
+            "Step 1 of 2 - Personal Details";
+    }
+</script>
+
+</body>
+</html>

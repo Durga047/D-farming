@@ -4,128 +4,220 @@
     <title>DFarming Login</title>
 
     <style>
-        body{
-            margin:0;
-            font-family:Arial, sans-serif;
-            background:#f5f5f5;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
 
-        .header{
-            background:#2e7d32;
-            color:white;
-            padding:15px;
-            text-align:center;
-            font-size:24px;
-            font-weight:bold;
+        .header {
+            background: #2e7d32;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .navbar{
-            background:#ffffff;
-            padding:15px;
-            text-align:center;
-            border-bottom:1px solid #ddd;
+        .navbar {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
         }
 
-        .navbar a{
-            text-decoration:none;
-            margin:20px;
-            color:#2e7d32;
-            font-weight:bold;
+        .navbar a {
+            text-decoration: none;
+            margin: 20px;
+            color: #2e7d32;
+            font-weight: bold;
         }
 
-        .navbar a:hover{
-            color:#1b5e20;
+        .navbar a:hover {
+            color: #1b5e20;
         }
 
-        .login-container{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:70vh;
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+            min-height: 70vh;
         }
 
-        .login-box{
-            background:white;
-            width:350px;
-            padding:30px;
-            border-radius:10px;
-            text-align:center;
-            box-shadow:0px 0px 15px rgba(0,0,0,0.2);
+        .login-box {
+            background: white;
+            width: 380px;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
 
-        .login-box h1{
-            color:#2e7d32;
-            margin-bottom:20px;
+        .login-box h1 {
+            color: #2e7d32;
+            margin-bottom: 25px;
         }
 
-        .login-box input{
-            width:90%;
-            padding:12px;
-            margin:10px 0;
-            border:1px solid #ccc;
-            border-radius:5px;
+        .login-box input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
         }
 
-        .login-box button{
-            width:100%;
-            padding:12px;
-            background:#2e7d32;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            font-size:16px;
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .login-box button:hover{
-            background:#1b5e20;
+        .login-button:hover {
+            background: #1b5e20;
         }
 
-        .whatsapp{
-            position:fixed;
-            bottom:20px;
-            right:20px;
-            background:#25D366;
-            color:white;
-            font-size:30px;
-            padding:15px;
-            border-radius:50%;
-            text-decoration:none;
+        .register-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .register-section h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .register-section p {
+            color: #666;
+        }
+
+        .register-button {
+            display: block;
+            text-decoration: none;
+            background: white;
+            color: #2e7d32;
+            border: 2px solid #2e7d32;
+            padding: 11px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .register-button:hover {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
 
+<!-- Header -->
 <div class="header">
     🌳 D Farming - Tree Plantation & Plant Booking
 </div>
 
+
+<!-- Navigation -->
 <div class="navbar">
+
     <a href="/">Home</a>
-    <a href="/register">Register</a>
+
     <a href="/login">Login</a>
-    <a href="/addplant">Add Plant</a>
-    <a href="/contact">Contact Us</a>
-    <a href="https://wa.me/919999999999">WhatsApp</a>
+
+
+    <a href="https://wa.me/919999999999">
+        WhatsApp
+    </a>
+
 </div>
 
+
+<!-- Login -->
 <div class="login-container">
+
     <div class="login-box">
-        <h1>D Farming Login</h1>
 
-        <form>
-            <input type="email" placeholder="Enter Email" required>
+        <h1>DFarming Login</h1>
 
-            <input type="password" placeholder="Enter Password" required>
 
-            <button type="submit">Login</button>
+        <form method="POST" action="/login">
+
+            <input type="email"
+                   name="email"
+                   placeholder="Enter Email Address"
+                   required>
+
+
+            <input type="password"
+                   name="password"
+                   placeholder="Enter Password"
+                   required>
+
+
+            <button type="submit"
+                    class="login-button">
+
+                Login
+
+            </button>
+
         </form>
-    </div>
+
+
+        <!-- New Registration -->
+        <div class="register-section">
+
+    <h3>New User?</h3>
+
+    <p>Create your DFarming account.</p>
+
+    <a href="/register" class="register-button">
+        Regular Customer Registration
+    </a>
+
+    <br>
+
+    <a href="/vip-register" class="register-button">
+        ⭐ VIP Customer Registration
+    </a>
+
 </div>
 
-<a href="https://wa.me/919999999999" class="whatsapp">
+    </div>
+
+</div>
+
+
+
+
+<!-- WhatsApp -->
+<a href="https://wa.me/919999999999"
+   class="whatsapp">
+
     💬
+
 </a>
 
 </body>

@@ -16,7 +16,7 @@
             padding:15px;
             text-align:center;
             font-size:24px;
-            font-weight:bold;;
+            font-weight:bold;
         }
 
         .navbar{
@@ -31,6 +31,10 @@
             margin:20px;
             color:#2e7d32;
             font-weight:bold;
+        }
+
+        .navbar a:hover{
+            color:#1b5e20;
         }
 
         .banner{
@@ -57,6 +61,7 @@
             width:250px;
             text-align:center;
             border-radius:10px;
+            background:white;
         }
 
         .card img{
@@ -73,7 +78,12 @@
             border-radius:5px;
             cursor:pointer;
         }
-		.whatsapp{
+
+        button:hover{
+            background:#1b5e20;
+        }
+
+        .whatsapp{
             position:fixed;
             bottom:20px;
             right:20px;
@@ -84,125 +94,152 @@
             border-radius:50%;
             text-decoration:none;
         }
-         .message-box{
-    background:#ffffff;
-    margin:20px auto;
-    width:80%;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
 
-.stats{
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    margin:30px;
-}
+        .message-box{
+            background:#ffffff;
+            margin:20px auto;
+            width:80%;
+            padding:20px;
+            border-radius:10px;
+            text-align:center;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
 
-.stat-card{
-    background:#e8f5e9;
-    padding:20px;
-    border-radius:10px;
-    width:180px;
-    text-align:center;
-}
+        .stats{
+            display:flex;
+            justify-content:center;
+            gap:40px;
+            margin:30px;
+        }
 
-.review-box{
-    background:white;
-    width:80%;
-    margin:20px auto;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+        .stat-card{
+            background:#e8f5e9;
+            padding:20px;
+            border-radius:10px;
+            width:180px;
+            text-align:center;
+        }
 
-.footer{
-    background:#2e7d32;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
-}
+        .review-box{
+            background:white;
+            width:80%;
+            margin:20px auto;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
 
-.banner button{
-    margin-top:20px;
-    font-size:18px;
-}
-.contact-btn{
-    background:white;
-    color:#2e7d32;
-    border:none;
-    padding:12px 30px;
-    margin-top:15px;
-    border-radius:5px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 2px 5px rgba(0,0,0,0.2);
-}
+        .footer{
+            background:#2e7d32;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
 
-.contact-btn:hover{
-    background:#f1f1f1;
-    transform:scale(1.05);
-    transition:0.3s;
-}
+        .banner button{
+            margin-top:20px;
+            font-size:18px;
+        }
+
+        .search{
+            padding:12px;
+            width:300px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        .contact-btn{
+            background:white;
+            color:#2e7d32;
+            border:none;
+            padding:12px 30px;
+            margin-top:15px;
+            border-radius:5px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            box-shadow:0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn:hover{
+            background:#f1f1f1;
+        }
     </style>
-
 </head>
-<a href="https://wa.me/919999999999"
-   class="whatsapp">
-   💬
-</a>
-<script>
-window.onload = function(){
-    alert("🌱 Welcome to DFarming! Book your favorite plants and help make Earth greener.");
-}
-</script>
 
 <body>
 
+<!-- WhatsApp -->
+<a href="https://wa.me/919999999999"
+   class="whatsapp">
+    💬
+</a>
+
+
+<!-- Header -->
 <div class="header">
     🌳 D Farming - Tree Plantation & Plant Booking
 </div>
 
 
-
+<!-- Navigation -->
 <div class="navbar">
+
     <a href="/">Home</a>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
+
+    <!-- Register removed -->
+
+
     <a href="/addplant">Add Plant</a>
-	<a href="/contact">Contact us</a>
+
+    <a href="/contact">Contact us</a>
+
     <a href="https://wa.me/919999999999">
         WhatsApp
     </a>
 
+</div>
 
 
-
+<!-- Banner -->
 <div class="banner">
-<h2>🌱 Welcome to DFarming</h2>
+
+    <h2>🌱 Welcome to DFarming</h2>
+
     <h1>Grow Green With DFarming 🌳</h1>
-	<p>
+
+    <p>
         Plant a tree today and create a greener tomorrow.
         Every plant you book helps build a healthier environment
         for future generations.
     </p>
-    <p>Book Trees and Plantation Services Online</p>
 
-    <button onclick="location.href='/register'">
-	
-        Join Green Mission
+    <p>
+        Book Trees and Plantation Services Online
+    </p>
+
+
+    <!-- Login button -->
+    <button type="button"
+            onclick="window.location.href='/login'">
+
+        🔐 Login to Join Green Mission
+
     </button>
-	<p><input type="text"
-           placeholder="Search Plants..."
-           class="search"> </p>
+
+
+    <!-- Search -->
+    <p>
+        <input type="text"
+               placeholder="Search Plants..."
+               class="search">
+    </p>
+
 </div>
 
 
-
+<!-- Statistics -->
 <div class="stats">
 
     <div class="stat-card">
@@ -221,15 +258,26 @@ window.onload = function(){
     </div>
 
 </div>
+
+
+<!-- Mission -->
 <div class="message-box">
+
     <h2>🌍 Our Mission</h2>
+
     <p>
         "One Tree, One Future."
-        DFarming aims to make plantation easy and accessible for everyone.
-        Together we can reduce pollution and protect nature.
+        DFarming aims to make plantation easy and accessible
+        for everyone. Together we can reduce pollution and
+        protect nature.
     </p>
+
 </div>
+
+
+<!-- Reviews -->
 <div class="review-box">
+
     <h2>⭐ Customer Reviews</h2>
 
     <p>
@@ -245,79 +293,136 @@ window.onload = function(){
     <p>
         "Great initiative for a greener future." – Suresh
     </p>
+
 </div>
 
+
+<!-- Plants -->
 <div class="plants">
 
+    <!-- Plant 1 -->
     <div class="card">
-	<img src="/static/uploads/1.avif">
-	<p>₹12</p>
-	<h3>Mango Tree</h3>
-        <button>Book Now</button>
-       <img src="{{ url_for('static', filename='uploads/mango.jpg') }}">
-        <h3>Mango Tree</h3>
-        <p>₹15</p>
-        <button>Book Now</button>
-		<img src="{{ url_for('static', filename='uploads/banyan.jpg') }}">
-        <h3>Mango Tree</h3>
-		<p>₹15</p>
-        <button>Book Now</button>
-    </div>
 
-    <div class="card">
-	<img src="/static/uploads/2.jpg">
-	<p>₹25</p>
-	<h3>Mango Tree</h3>
-        <button>Book Now</button>
-	
-        <img src="/static/uploads/neem.jpg">
+        <img src="/static/uploads/1.avif">
+
+        <h3>Mango Tree</h3>
+
         <p>₹12</p>
-		<h3>Mango Tree</h3>
+
         <button>Book Now</button>
-		 
-    	<img src="/static/uploads/marvers.jpg">
+
+        <br><br>
+
+        <img src="{{ url_for('static', filename='uploads/mango.jpg') }}">
+
         <h3>Mango Tree</h3>
-		<p>₹12</p>
+
+        <p>₹15</p>
+
         <button>Book Now</button>
+
+        <br><br>
+
+        <img src="{{ url_for('static', filename='uploads/banyan.jpg') }}">
+
+        <h3>Banyan Tree</h3>
+
+        <p>₹15</p>
+
+        <button>Book Now</button>
+
     </div>
 
+
+    <!-- Plant 2 -->
     <div class="card">
-	<img src="/static/uploads/3.webp">
-	<p>₹15</p>
-	<h3>Mango Tree</h3>
-        <button>Book Now</button>
-        <img src="{{ url_for('static', filename='uploads/banana.jpg') }}">
-        <h3>Coconut Tree</h3>
-        <p>₹20</p>
-        <button>Book Now</button>
-		<img src="{{ url_for('static', filename='uploads/5.jpg') }}">
-        <h3>Mango Tree</h3>
-		<p>₹15</p>
-        <button>Book Now</button>
-    </div>
-	
 
-<script>
-window.onload = function(){
-    setTimeout(function(){
-        alert("🌱 Welcome to DFarming! Book your favorite plants and help make Earth greener.");
-    },1000);
-}
-</script>
+        <img src="/static/uploads/2.jpg">
+
+        <h3>Mango Tree</h3>
+
+        <p>₹25</p>
+
+        <button>Book Now</button>
+
+        <br><br>
+
+        <img src="/static/uploads/neem.jpg">
+
+        <h3>Neem Tree</h3>
+
+        <p>₹12</p>
+
+        <button>Book Now</button>
+
+        <br><br>
+
+        <img src="/static/uploads/marvers.jpg">
+
+        <h3>Marver Tree</h3>
+
+        <p>₹12</p>
+
+        <button>Book Now</button>
+
+    </div>
+
+
+    <!-- Plant 3 -->
+    <div class="card">
+
+        <img src="/static/uploads/3.webp">
+
+        <h3>Mango Tree</h3>
+
+        <p>₹15</p>
+
+        <button>Book Now</button>
+
+        <br><br>
+
+        <img src="{{ url_for('static', filename='uploads/banana.jpg') }}">
+
+        <h3>Coconut Tree</h3>
+
+        <p>₹20</p>
+
+        <button>Book Now</button>
+
+        <br><br>
+
+        <img src="{{ url_for('static', filename='uploads/5.jpg') }}">
+
+        <h3>Mango Tree</h3>
+
+        <p>₹15</p>
+
+        <button>Book Now</button>
+
+    </div>
 
 </div>
 
+
+<!-- Footer -->
 <div class="footer">
+
     <h3>🌳 DFarming</h3>
+
     <p>Plant Today, Protect Tomorrow</p>
+
     <p>📞 +91 9876543210</p>
+
     <p>📧 info@dfarming.com</p>
-	
-<button class="contact-btn" onclick="location.href='/contact'">
-    📞 Contact Us
-</button>
+
+    <button class="contact-btn"
+            onclick="window.location.href='/contact'">
+
+        📞 Contact Us
+
+    </button>
+
 </div>
 
 </body>
-
 </html>

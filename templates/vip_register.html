@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DFarming VIP Customer Registration</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: #2e7d32;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            margin: 20px;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #1b5e20;
+        }
+
+        .container {
+            width: 700px;
+            max-width: 90%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+        }
+
+        .vip-title {
+            text-align: center;
+            color: #b8860b;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .section {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .section h2 {
+            color: #2e7d32;
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row > div {
+            flex: 1;
+        }
+
+        .location-button {
+            margin-top: 12px;
+            background: #1565c0;
+        }
+
+        .location-button:hover {
+            background: #0d47a1;
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 14px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: #1b5e20;
+        }
+
+        .note {
+            color: #666;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+
+        @media(max-width: 600px) {
+
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+    🌳 D Farming - Tree Plantation & Plant Booking
+</div>
+
+
+<div class="navbar">
+
+    <a href="/">Home</a>
+
+    <a href="/login">Login</a>
+
+    <a href="/contact">Contact Us</a>
+
+</div>
+
+
+<div class="container">
+
+    <h1>⭐ VIP Customer Registration</h1>
+
+    <div class="vip-title">
+        Special Customer - Own Land & Tree Plantation
+    </div>
+
+
+    <form method="POST"
+          action="/vip-register"
+          enctype="multipart/form-data">
+
+
+        <!-- PERSONAL DETAILS -->
+
+        <div class="section">
+
+            <h2>👤 Personal Details</h2>
+
+            <div class="row">
+
+                <div>
+                    <label>First Name</label>
+
+                    <input type="text"
+                           name="first_name"
+                           placeholder="Enter First Name"
+                           required>
+                </div>
+
+
+                <div>
+                    <label>Last Name</label>
+
+                    <input type="text"
+                           name="last_name"
+                           placeholder="Enter Last Name"
+                           required>
+                </div>
+
+            </div>
+
+
+            <label>Email</label>
+
+            <input type="email"
+                   name="email"
+                   placeholder="Enter Email"
+                   required>
+
+
+            <label>Phone Number</label>
+
+            <input type="tel"
+                   name="phone"
+                   placeholder="Enter 10 digit phone number"
+                   pattern="[0-9]{10}"
+                   maxlength="10"
+                   required>
+
+
+            <label>Occupation</label>
+
+            <input type="text"
+                   name="occupation"
+                   placeholder="Enter Occupation">
+
+
+            <label>Customer Photo</label>
+
+            <input type="file"
+                   name="customer_photo"
+                   accept="image/*">
+
+            <p class="note">
+                Upload your profile/customer photo.
+            </p>
+
+        </div>
+
+
+        <!-- LAND DETAILS -->
+
+        <div class="section">
+
+            <h2>🌱 Land Details</h2>
+
+
+            <label>Land Name</label>
+
+            <input type="text"
+                   name="land_name"
+                   placeholder="Example: My Farm Land">
+
+
+            <div class="row">
+
+                <div>
+
+                    <label>Land Area</label>
+
+                    <input type="number"
+                           name="land_area"
+                           placeholder="Enter area">
+
+                </div>
+
+
+                <div>
+
+                    <label>Area Unit</label>
+
+                    <select name="land_unit">
+
+                        <option value="acre">
+                            Acre
+                        </option>
+
+                        <option value="hectare">
+                            Hectare
+                        </option>
+
+                        <option value="sqft">
+                            Square Feet
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <label>Land Description</label>
+
+            <textarea name="land_description"
+                      placeholder="Describe your land"></textarea>
+
+
+            <label>Land Photo</label>
+
+            <input type="file"
+                   name="land_photo"
+                   accept="image/*">
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="section">
+
+            <h2>📍 Plantation Location</h2>
+
+
+            <label>Address</label>
+
+            <textarea name="address"
+                      placeholder="Enter complete land address"
+                      required></textarea>
+
+
+            <div class="row">
+
+                <div>
+
+                    <label>Village / City</label>
+
+                    <input type="text"
+                           name="city"
+                           placeholder="Village or City"
+                           required>
+
+                </div>
+
+
+                <div>
+
+                    <label>District</label>
+
+                    <input type="text"
+                           name="district"
+                           placeholder="District"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div>
+
+                    <label>State</label>
+
+                    <input type="text"
+                           name="state"
+                           placeholder="State"
+                           required>
+
+                </div>
+
+
+                <div>
+
+                    <label>PIN Code</label>
+
+                    <input type="text"
+                           name="pincode"
+                           placeholder="PIN Code"
+                           maxlength="6"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <label>Latitude</label>
+
+            <input type="text"
+                   id="latitude"
+                   name="latitude"
+                   placeholder="Latitude"
+                   readonly>
+
+
+            <label>Longitude</label>
+
+            <input type="text"
+                   id="longitude"
+                   name="longitude"
+                   placeholder="Longitude"
+                   readonly>
+
+
+            <button type="button"
+                    class="location-button"
+                    onclick="getLocation()">
+
+                📍 Use My Current Location
+
+            </button>
+
+
+            <p class="note">
+                Your browser may ask permission to access your location.
+            </p>
+
+        </div>
+
+
+        <!-- PLANT DETAILS -->
+
+        <div class="section">
+
+            <h2>🌳 Plant Details</h2>
+
+
+            <label>Plant / Tree Name</label>
+
+            <input type="text"
+                   name="plant_name"
+                   placeholder="Example: Mango, Neem, Coconut"
+                   required>
+
+
+            <label>Number of Trees</label>
+
+            <input type="number"
+                   name="tree_count"
+                   min="1"
+                   placeholder="Number of trees"
+                   required>
+
+
+            <label>Plant Photo</label>
+
+            <input type="file"
+                   name="plant_photo"
+                   accept="image/*"
+                   required>
+
+
+            <label>Plantation Date</label>
+
+            <input type="date"
+                   name="plantation_date">
+
+
+            <label>Plantation Notes</label>
+
+            <textarea name="plant_notes"
+                      placeholder="Add information about your plantation"></textarea>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="section">
+
+            <h2>🔐 Account Security</h2>
+
+
+            <label>Create Password</label>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Create Password"
+                   minlength="6"
+                   required>
+
+
+            <label>Confirm Password</label>
+
+            <input type="password"
+                   name="confirm_password"
+                   placeholder="Confirm Password"
+                   minlength="6"
+                   required>
+
+        </div>
+
+
+        <button type="submit"
+                class="submit-button">
+
+            🌳 Create VIP Customer Account
+
+        </button>
+
+    </form>
+
+
+    <div class="login-link">
+
+        Already have an account?
+
+        <a href="/login">
+            Login Here
+        </a>
+
+    </div>
+
+</div>
+
+
+<a href="https://wa.me/919999999999"
+   class="whatsapp">
+
+    💬
+
+</a>
+
+
+<script>
+
+function getLocation() {
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                document.getElementById("latitude").value =
+                    position.coords.latitude;
+
+                document.getElementById("longitude").value =
+                    position.coords.longitude;
+
+                alert("📍 Location added successfully!");
+
+            },
+
+            function(error) {
+
+                alert(
+                    "Unable to get location. Please allow location access."
+                );
+
+            }
+
+        );
+
+    } else {
+
+        alert(
+            "Geolocation is not supported by this browser."
+        );
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>

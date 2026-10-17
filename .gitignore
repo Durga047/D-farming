@@ -10,3 +10,21 @@ database.db
 database.db-journal
 app.py.backup
 database.db.backup
+
+# Local database and backup files
+*.db
+*.db-*
+*.backup
+*.before-vip-backup
+app.py.*-backup
+static/uploads/*
+!static/uploads/1.avif
+!static/uploads/2.jpg
+!static/uploads/3.webp
+!static/uploads/4.avif
+!static/uploads/5.jpg
+!static/uploads/banana.jpg
+!static/uploads/banyan.jpg
+!static/uploads/mango.jpg
+!static/uploads/marvers.jpg
+!static/uploads/neem.jpg

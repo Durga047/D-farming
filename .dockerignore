@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+*.backup
+*.db.backup
+*.db.before-vip-backup
+
+# Keep local databases and runtime uploads out of the image
+*.db
+*.db-*
+*.backup
+static/uploads/*

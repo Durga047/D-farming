@@ -1,156 +1,257 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DFarming - Add Plant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Plant | D-Farming</title>
 
     <style>
-        body{
-            margin:0;
-            font-family:Arial, sans-serif;
-            background:#f5f5f5;
+        * {
+            box-sizing: border-box;
         }
 
-        .header{
-            background:#2e7d32;
-            color:white;
-            padding:15px;
-            text-align:center;
-            font-size:24px;
-            font-weight:bold;
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f2f8f1;
+            color: #263b2a;
         }
 
-        .navbar{
-            background:#ffffff;
-            padding:15px;
-            text-align:center;
-            border-bottom:1px solid #ddd;
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar a{
-            text-decoration:none;
-            margin:20px;
-            color:#2e7d32;
-            font-weight:bold;
+        h1 {
+            text-align: center;
+            color: #23823b;
+            margin-bottom: 10px;
         }
 
-        .navbar a:hover{
-            color:#1b5e20;
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
         }
 
-        .login-container{
-            display:flex;
-            justify-content:center;
-            align-items:flex-start;
-            padding-top:50px;
-            min-height:70vh;
+        label {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 7px;
+            font-weight: bold;
         }
 
-        .login-box{
-            background:white;
-            width:450px;
-            padding:30px;
-            border-radius:10px;
-            text-align:center;
-            box-shadow:0px 0px 15px rgba(0,0,0,0.2);
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd8cc;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #fff;
         }
 
-        .login-box h1{
-            color:#2e7d32;
-            margin-bottom:20px;
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #23823b;
         }
 
-        .login-box input,
-        .login-box textarea{
-            width:90%;
-            padding:12px;
-            margin:10px 0;
-            border:1px solid #ccc;
-            border-radius:5px;
-            font-size:14px;
+        input[type="file"] {
+            background: #f8fbf7;
         }
 
-        .login-box button{
-            width:100%;
-            padding:12px;
-            background:#2e7d32;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            font-size:16px;
+        .hint {
+            display: block;
+            margin-top: 6px;
+            color: #666;
+            font-size: 13px;
         }
 
-        .login-box button:hover{
-            background:#1b5e20;
+        .preview {
+            display: none;
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin-top: 15px;
+            border-radius: 8px;
+            background: #f5f5f5;
         }
 
-        .whatsapp{
-            position:fixed;
-            bottom:20px;
-            right:20px;
-            background:#25D366;
-            color:white;
-            font-size:30px;
-            padding:15px;
-            border-radius:50%;
-            text-decoration:none;
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #23823b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #17652b;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #23823b;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            background: #fff3cd;
+            color: #664d03;
         }
     </style>
 </head>
 
 <body>
+    <div class="container">
 
-<div class="header">
-    🌳 D Farming - Tree Plantation & Plant Booking
-</div>
+        <h1>Add a New Plant</h1>
+        <p class="subtitle">Add plant details and upload a plant image.</p>
 
-<div class="navbar">
-    <a href="/">Home</a>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-    <a href="/addplant">Add Plant</a>
-    <a href="/contact">Contact Us</a>
-</div>
+        <!-- Display Flask flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-<div class="login-container">
-    <div class="login-box">
+        <!-- Plant form -->
+        <form
+            method="POST"
+            action="{{ url_for('add_plant') }}"
+            enctype="multipart/form-data"
+        >
 
-        <h1>🌱 Add Plant</h1>
+            <label for="plant_name">Plant Name *</label>
+            <input
+                type="text"
+                id="plant_name"
+                name="plant_name"
+                placeholder="Example: Mango Tree"
+                maxlength="100"
+                required
+            >
 
-        <form method="POST">
+            <label for="category">Plant Category *</label>
+            <select id="category" name="category" required>
+                <option value="">Select a category</option>
+                <option value="Fruit Tree">Fruit Tree</option>
+                <option value="Flower Plant">Flower Plant</option>
+                <option value="Medicinal Plant">Medicinal Plant</option>
+                <option value="Indoor Plant">Indoor Plant</option>
+                <option value="Shade Tree">Shade Tree</option>
+                <option value="Other">Other</option>
+            </select>
 
-            <input type="text"
-                   name="plant_name"
-                   placeholder="Plant Name"
-                   required>
+            <label for="price">Price (₹) *</label>
+            <input
+                type="number"
+                id="price"
+                name="price"
+                placeholder="Enter plant price"
+                min="0"
+                step="0.01"
+                required
+            >
 
-            <input type="text"
-                   name="category"
-                   placeholder="Plant Category"
-                   required>
-
-            <input type="number"
-                   name="price"
-                   placeholder="Price"
-                   required>
-
+            <label for="description">Plant Description</label>
             <textarea
+                id="description"
                 name="description"
                 rows="4"
-                placeholder="Plant Description"></textarea>
+                maxlength="2000"
+                placeholder="Describe the plant, its benefits, and care requirements."
+            ></textarea>
 
-            <button type="submit">
-                Add Plant
-            </button>
+            <label for="plant_photo">Upload Plant Image *</label>
+            <input
+                type="file"
+                id="plant_photo"
+                name="plant_photo"
+                accept=".jpg,.jpeg,.png,.webp,.avif"
+                required
+            >
+
+            <span class="hint">
+                Supported formats: JPG, JPEG, PNG, WEBP, AVIF.
+                Maximum file size: 8 MB.
+            </span>
+
+            <img id="imagePreview" class="preview" alt="Selected plant preview">
+
+            <button type="submit">Add Plant</button>
 
         </form>
 
+        <a class="back-link" href="{{ url_for('home') }}">
+            ← Back to Home
+        </a>
+
     </div>
-</div>
 
-<a href="https://wa.me/919999999999" class="whatsapp">
-    💬
-</a>
+    <script>
+        const imageInput = document.getElementById("plant_photo");
+        const imagePreview = document.getElementById("imagePreview");
 
+        imageInput.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (!file) {
+                imagePreview.removeAttribute("src");
+                imagePreview.style.display = "none";
+                return;
+            }
+
+            const allowedTypes = [
+                "image/jpeg",
+                "image/png",
+                "image/webp",
+                "image/avif"
+            ];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert("Please select a JPG, PNG, WEBP, or AVIF image.");
+                this.value = "";
+                imagePreview.removeAttribute("src");
+                imagePreview.style.display = "none";
+                return;
+            }
+
+            if (file.size > 8 * 1024 * 1024) {
+                alert("The image must be 8 MB or smaller.");
+                this.value = "";
+                imagePreview.removeAttribute("src");
+                imagePreview.style.display = "none";
+                return;
+            }
+
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.style.display = "block";
+        });
+    </script>
 </body>
 </html>

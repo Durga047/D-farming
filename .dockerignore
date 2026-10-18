@@ -12,3 +12,9 @@ __pycache__
 *.db-*
 *.backup
 static/uploads/*
+.env*
+!.env.example
+*.bak
+*.log
+rollback-backup*/
+fileqq

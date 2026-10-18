@@ -363,6 +363,40 @@ def health():
         if conn is not None:
             conn.close()
 
+# --------------------------------------------------
+# 6. PROMETHEUS METRICS
+# --------------------------------------------------
+
+@app.route("/metrics")
+def metrics():
+    database_up = 1
+    conn = None
+
+    try:
+        conn = get_db_connection()
+        conn.execute("SELECT 1").fetchone()
+
+    except sqlite3.Error:
+        database_up = 0
+        app.logger.exception("Metrics database check failed")
+
+    finally:
+        if conn is not None:
+            conn.close()
+
+    metrics_output = (
+        "# HELP dfarming_app_up Whether the application is responding.\n"
+        "# TYPE dfarming_app_up gauge\n"
+        "dfarming_app_up 1\n"
+        "# HELP dfarming_database_up Whether the database is reachable.\n"
+        "# TYPE dfarming_database_up gauge\n"
+        f"dfarming_database_up {database_up}\n"
+    )
+
+    return metrics_output, 200, {
+        "Content-Type": "text/plain; version=0.0.4; charset=utf-8"
+    }
+
 
 # --------------------------------------------------
 # 6. NORMAL USER REGISTRATION

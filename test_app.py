@@ -19,6 +19,22 @@ application_module.app.config["TESTING"] = True
 
 
 class DFarmingSmokeTests(unittest.TestCase):
+    def test_metrics_endpoint(self):
+        response = self.client.get("/metrics")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            "text/plain",
+            response.headers.get("Content-Type", "")
+        )
+        self.assertIn(
+            b"dfarming_app_up 1",
+            response.data
+        )
+        self.assertIn(
+            b"dfarming_database_up 1",
+            response.data
+        )
 
     def setUp(self):
         self.client = application_module.app.test_client()

@@ -1,13 +1,14 @@
+
 pipeline {
     agent any
 
     options {
         timestamps()
+        disableConcurrentBuilds()
     }
 
     environment {
         CI_IMAGE = 'dfarming-app:ci'
-        CI_CONTAINER = 'dfarming-ci-healthcheck'
     }
 
     stages {
@@ -19,7 +20,7 @@ pipeline {
 
         stage('Python Syntax Check') {
             steps {
-                bat 'python -m py_compile app.py test_app.py healthcheck.py'
+                bat 'python -m py_compile app.py test_app.py healthcheck.py docker_health_status.py'
             }
         }
 
@@ -31,15 +32,34 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %CI_IMAGE% .'
+                script {
+                    env.GIT_SHA = bat(
+                        script: '@git rev-parse --short=12 HEAD',
+                        returnStdout: true
+                    ).trim()
+
+                    env.RELEASE_IMAGE =
+                        "dfarming-app:${env.GIT_SHA}-${env.BUILD_NUMBER}"
+
+                    env.CI_CONTAINER =
+                        "dfarming-ci-${env.BUILD_NUMBER}"
+                }
+
+                bat '''
+                    docker build -t %CI_IMAGE% -t %RELEASE_IMAGE% .
+                    if errorlevel 1 exit /b 1
+
+                    echo Release image: %RELEASE_IMAGE%
+                    docker image inspect %RELEASE_IMAGE% --format "Image ID={{.Id}} Created={{.Created}}"
+                    if errorlevel 1 exit /b 1
+                '''
             }
         }
 
         stage('Docker Container Health Check') {
             steps {
                 bat '''
-                    docker rm -f %CI_CONTAINER% 2>NUL
-                    docker run -d --name %CI_CONTAINER% -p 127.0.0.1:5056:5000 -e SECRET_KEY=temporary-ci-test-key -e DATABASE_PATH=/tmp/dfarming-ci-test.db -e UPLOAD_FOLDER=/tmp/dfarming-ci-uploads %CI_IMAGE%
+                    docker run -d --name %CI_CONTAINER% -p 127.0.0.1:5056:5000 -e SECRET_KEY=temporary-ci-test-key -e DATABASE_PATH=/tmp/dfarming-ci-test.db -e UPLOAD_FOLDER=/tmp/dfarming-ci-uploads %RELEASE_IMAGE%
                     if errorlevel 1 exit /b 1
 
                     python healthcheck.py
@@ -48,29 +68,8 @@ pipeline {
                         exit /b 1
                     )
 
-                    setlocal EnableDelayedExpansion
-                    set "HEALTH_STATUS=starting"
-
-                    for /L %%i in (1,1,25) do (
-                        for /F "delims=" %%s in ('docker inspect --format "{{.State.Health.Status}}" %CI_CONTAINER% 2^>NUL') do set "HEALTH_STATUS=%%s"
-
-                        if "!HEALTH_STATUS!"=="healthy" (
-                            echo Docker health status is healthy.
-                            exit /b 0
-                        )
-
-                        if "!HEALTH_STATUS!"=="unhealthy" (
-                            echo Docker container reported unhealthy status.
-                            docker logs %CI_CONTAINER%
-                            exit /b 1
-                        )
-
-                        timeout /t 2 /nobreak >NUL
-                    )
-
-                    echo Timed out waiting for Docker health status. Current status: !HEALTH_STATUS!
-                    docker logs %CI_CONTAINER%
-                    exit /b 1
+                    python docker_health_status.py %CI_CONTAINER%
+                    if errorlevel 1 exit /b 1
                 '''
             }
         }
@@ -78,11 +77,18 @@ pipeline {
 
     post {
         always {
-            bat 'docker rm -f %CI_CONTAINER% 2>NUL & exit /b 0'
+            script {
+                if (env.CI_CONTAINER) {
+                    bat 'docker rm -f %CI_CONTAINER% 2>NUL & exit /b 0'
+                }
+            }
         }
+
         success {
             echo 'D-Farming CI passed: dependencies, syntax, tests, Docker build, and Docker health status.'
+            echo "Release image: ${env.RELEASE_IMAGE}"
         }
+
         failure {
             echo 'D-Farming CI failed. Review the stage logs.'
         }
